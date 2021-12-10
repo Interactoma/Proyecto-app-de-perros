@@ -8,21 +8,14 @@ const temperament = require('./temperament');
 
 
 
+
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-router.get('/dogs', async (req, res, next) => {
-    
-    const allDogsApi = await getAllDogs()
-    console.log('La data ha sido descargada de la API de perros')
-    allDogsApi ? res.status(200).send(allDogsApi.data) : res.status(404)
-})
+router.get('/dogs', dogs);
 
-async function getAllDogs(){
-    const allDogsApi =  await (axios.get('https://api.thedogapi.com/v1/breeds'))
-    return allDogsApi
-}
+
 
 module.exports = router;
