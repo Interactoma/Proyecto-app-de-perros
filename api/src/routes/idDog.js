@@ -1,39 +1,36 @@
-const { Router } = require('express');
 const { Op } = require("sequelize");
-const { Dog } = require('../db');
+const { Dog, Temperament } = require('../db');
 const {getAllDogs} = require('../api/getDogs')
+const axios = require('axios');
 
-const router = Router();
+async function getDogId(req, res) {
 
-router.get('/:id', async (req, res) => {
-    const { id } = req.params;
-    console.log(id)
-    await getAllDogs()
+    const { idRaza } = req.params
 
-/*     if(id){
-        let unDogo = await Dog.findAll({
-            where: {
-                id: {
-                    [Op.eq]: id
-                }
+    console.log(idRaza.length + ' ' + idRaza)
+    if (idRaza.length < 4) {
+        let dogos = await axios(`https://api.thedogapi.com/v1/breeds`)
+        console.log('Paso 2')
+        const dogo = await dogos.data.map(dog => {
+            return {
+                id: dog.id,
+                name: dog.name,
+                height: dog.height.metric,
+                weight: dog.weight.metric,
+                life_span: dog.life_span,
+                image: dog.image.url,
+                temperament: dog.temperament
             }
         }) 
-    } */
-
-    if(id) {
-        let unDogo = await Dog.findAll({
-            
-            where: {
-                id: {
-                    [Op.eq]: id
-                }
-            }
-        })
-        unDogo.length > 0 ? res.status(200).json(unDogo) : res.status(404).send('DogoId no encontrado')
+        let unDogo = dogo.filter(e => e.id == idRaza)
+        unDogo.length ? res.status(200).json(unDogo) : res.status(404).send('DogoId no encontrado')
     } else {
-        res.status(404).send("Error al enviar dogoId")
+        console.log('entre aqui')
+        let unDogo = await Dog.findByPk(idRaza, {
+            include: [Temperament]
+        })
+        unDogo ? res.status(200).json(unDogo) : res.status(404).send('DogoId no encontrado')
     }
+}
 
-})
-
-module.exports = router;
+module.exports = {getDogId}
