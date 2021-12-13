@@ -1,14 +1,15 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, UUIDV4 } = require('sequelize');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('dog', {
+  sequelize.define('Dog', {
     
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      defaultValue: UUIDV4 
     },
 
     name: {
@@ -29,8 +30,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING
     },
     image:{
-      type: DataTypes.STRING
-    }
+      type: DataTypes.STRING,
+      defaultValue: 'https://www.hola.com/imagenes/estar-bien/20190820147813/razas-perros-pequenos-parecen-grandes/0-711-550/razas-perro-pequenos-grandes-a.jpg?filter=w500'
+    }//MULTER
     
-  });
+  }, { timestamps: false });
 };

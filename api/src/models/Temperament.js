@@ -1,14 +1,11 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('temperament', {
+    sequelize.define('Temperament', {
 
-/*         id: {
-            type: DataTypes.INTEGER
-        }, */
         name: {
             type: DataTypes.STRING
         }
 
-    })
+    }, { timestamps: false })
 }
