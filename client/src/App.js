@@ -1,21 +1,24 @@
 import './App.css';
-import Cards from './components/cards';
-const axios = require('axios')
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Cards from './components/Cards/cards';
+import Navbar from './components/Navbar';
+import Home from './components/Home'
+//const axios = require('axios')
 
-function App(dogs) {
-  function dogs(){
-    fetch('http://localhost:3001/dogs')
-    .then(e =>{
-      const dogs = {
-        
-      }
-    })
-  }
+function App() {
+
   return (
-    <div className="App">
-      <h1>Henry Dogs</h1>
-      <Cards props={dogs}/>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Navbar />
+        <Switch>
+          <Route exact path = '/' component={Home} />
+          <Route exact path = '/home' component={Cards} />
+        </Switch>
+        
+      </div>
+    </BrowserRouter>
+
   );
 }
 

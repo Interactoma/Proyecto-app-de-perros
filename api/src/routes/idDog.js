@@ -25,7 +25,6 @@ async function getDogId(req, res) {
         let unDogo = dogo.filter(e => e.id == idRaza)
         unDogo.length ? res.status(200).json(unDogo) : res.status(404).send('DogoId no encontrado')
     } else {
-        console.log('entre aqui')
         let unDogo = await Dog.findByPk(idRaza, {
             include: [Temperament]
         })
