@@ -1,0 +1,9 @@
+.container{
+    
+    background-image: url('https://images.hdqwalls.com/wallpapers/puppy-snout-dog.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:700px;
+    width: cover;
+}

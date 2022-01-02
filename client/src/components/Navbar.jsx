@@ -1,9 +1,10 @@
-//import React from 'react';
+import style from './Navbar.module.css'
 
 export default function Navbar(){
     return(
-        <>
-            <h1>Dogs</h1>
-        </>
+        <div className={style.container}>
+            <img src="" alt="" />
+            <h1>The Dogs Page</h1>
+        </div>
     )
 }
