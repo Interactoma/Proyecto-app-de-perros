@@ -98,3 +98,12 @@ export function orderByWeight(tipo){
         )
     }
 };
+
+export function getDetail(id){
+    return async function(dispatch){
+        let dogoDetalle = await axios(`http://localhost:3001/dogs/${id}`)
+        return(
+            dispatch({type: "GET_DETAIL", payload: dogoDetalle.data})
+        )
+    }
+}
