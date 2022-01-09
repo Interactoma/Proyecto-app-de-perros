@@ -1,10 +1,12 @@
 const { Router } = require('express');
 //const axios = require('axios');
-const { getAllDogs } = require('../api/getDogs')
-const { getTemperaments } = require('../api/getTemperament')
+const { getAllDogs } = require('../controller/getDogs')
+const { getTemperaments } = require('../controller/getTemperament')
 
 const { getDogId } = require('./idDog')
 const { Dog, Temperament } = require('../db');
+const { ordTemp } = require('./orTemperament')
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -16,11 +18,27 @@ const router = Router();
 
 router.get('/dogs', getAllDogs)
 router.get('/dogs/:idRaza', getDogId)
+router.get('/temperaments/v2', async (req, res) => {
+    const { temperament } = req.body
 
-router.get('/temperament', async (req, res) => {
-    await getTemperaments()
-    res.status(200).json(await Temperament.findAll())
+    let dogosBS = await Temperament.findAll({
+        where: {
+            name: temperament
+        }
+    })
+    res.status(200).json(dogosBS)
 })
+router.get('/temperament', (req, res) => {
+    getTemperaments()
+    .then(
+        Temperament.findAll()
+        .then(data =>{
+            res.status(200).json(data)
+        })
+    )
+    
+})
+
 
 router.post('/dog', async (req, res) => {
     const { name, height, weight, life_span, temperament } = req.body
@@ -33,7 +51,6 @@ router.post('/dog', async (req, res) => {
                 name: temperament
             }
         })
-
         newDog.addTemperament(newTemperament)
         res.status(200).json({ msg: "perro creado" })
     } catch (error) {
@@ -41,6 +58,8 @@ router.post('/dog', async (req, res) => {
     }
 
 })
+
+
 
 
 

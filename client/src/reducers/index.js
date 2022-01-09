@@ -32,11 +32,13 @@ function rootReducer(state = initialState, action) {
                 dogos: action.payload
             }
         case "ORDER_MAY-MEN":
+
             return{
                 ...state,
                 dogos: action.payload
             }
         case "ORDER_MEN-MAY":
+
             return{
                 ...state,
                 dogos: action.payload
@@ -46,6 +48,16 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 detail: action.payload
             }
+        case "FROM_DB":
+            return{
+                ...state,
+                dogos: action.payload
+            }
+        case "FROM_API":
+            return{
+                ...state,
+                dogos: action.payload
+            }        
         default:
             return state
     }

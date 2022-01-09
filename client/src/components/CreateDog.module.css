@@ -1,0 +1,21 @@
+.container{
+    padding: 12px 30px;
+    margin-top: 150px;
+    margin-left: 32.5%;
+    width: 35%;
+    font-size: 18px;
+    border-radius: 10px;
+    color: #efc861;
+    background-color: #6c2f2c;
+    box-shadow: 3px 6px #44181a;
+    display: flex;
+    flex-direction: column;
+}
+
+.input{
+    font-size: larger;
+}
+
+.error{
+    color: red;
+}

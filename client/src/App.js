@@ -1,9 +1,9 @@
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Navbar from './components/Navbar';
 import Home from './components/Home'
 import LandinPage from './components/LandingPage';
 import DogDetail from './components/DogDetail';
+import CreateDog from './components/CreateDog';
 //const axios = require('axios')
 
 function App() {
@@ -11,11 +11,10 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar />
         <Switch>
           <Route exact path = '/' component={LandinPage} />
           <Route exact path = '/home' component={Home} />
-          <Route exact path= '/create-dog' />
+          <Route exact path= '/create-dog' component={CreateDog}/>
           <Route path='/dog-detail/:id' component={DogDetail} />
         </Switch>
         

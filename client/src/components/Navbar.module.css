@@ -1,8 +1,30 @@
 .container{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     justify-content: center;
-    background-color: rgb(255, 243, 217);
+    background-color: #efc861;
     text-align: center;
     height: 120px;
+}
+
+.title{
+    font-size: 45px;
+}
+
+.btn{
+    padding: 12px 30px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 10px;
+    color: #efc861;
+    background-color: #6c2f2c;
+    box-shadow: 3px 6px #44181a;
+}
+
+.btn:hover{
+    background-color: #d38a50;
+    color: white;
+    transition: 0.4s;
+    box-shadow: 1px 2px #2a0f10;
 }

@@ -1,9 +1,44 @@
 .container{
-    
     background-image: url('https://images.hdqwalls.com/wallpapers/puppy-snout-dog.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    height:700px;
+    height:875px;
     width: cover;
+}
+
+.botonContainer{
+    position: relative;
+    position: absolute;
+    top: 40%;
+    left: 60%;
+}
+
+.boton{
+    background-color: #6c2f2c;
+    color: #efc861;
+    text-decoration: none;
+    padding: 15px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 10px;
+    box-shadow: 3px 9px #44181a;
+}
+
+.boton:hover{
+    background-color: #efc861;
+    color: white;
+    transition: 0.4s;
+}
+
+.boton:active{
+    background-color: #efc861;
+    color: white;
+    box-shadow: 1px 2px #2a0f10;
+}
+
+.botonContainer:active{
+    display: inline-block;
+    transform: translateY(4px);
+    transition: 0.4s;
 }

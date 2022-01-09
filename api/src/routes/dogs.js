@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { Op } = require("sequelize");
 const { Dog } = require('../db');
-const {getAllDogs} = require('../api/getDogs')
+const {getAllDogs} = require('../controller/getDogs')
 
 const router = Router();
 

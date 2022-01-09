@@ -19,15 +19,24 @@ export default function Card({id, name, image, temperament, height, weight}){
 
     return(
         <div className={style.container}>
-            <NavLink to={`/dog-detail/${id}`}>
-            <img src={image} className={style.image} alt="Imagen no encontrada" />
+            <NavLink to={`/dog-detail/${id}`} className={style.link}>
+                
+                <div className={style.info}>
+                <img src={image} className={style.image} alt="Imagen no encontrada" />
+                    <h4 className={style.name}>{name}</h4>
+                    <div>
+                        <p>temperamento</p>
+                        <p>{temperament}</p>
+                    </div>
+                    
+                    <div>
+                        <p>Peso</p>
+                        <p>{weight} kg</p>
+                    </div>
+                </div>
             </NavLink>
             
-            <div className={style.info}>
-                <h4 className={style.name}>{name}</h4>
-                <p>temperamento: {temperament}</p>
-                <p>{weight}</p>
-            </div>
+
 
             
         </div> 

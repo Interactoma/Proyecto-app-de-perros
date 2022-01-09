@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../Card/Card';
 import { useSelector } from "react-redux";
 import { connect } from 'react-redux';
-import {getDogs, getTemperaments, filterByTemperaments, orderByAlphabet, orderByWeight} from "../../actions/index"
+import {getDogs, getTemperaments, filterByTemperaments, orderByAlphabet, orderByWeight, orderByOrigen} from "../../actions/index"
 import style from './Cards.module.css'
 
 function existe(perro){
@@ -24,7 +24,7 @@ function existe(perro){
   }
 }
 
-function Cards({dog, filterByTemp, orderByAlp, orderByWei}) {
+function Cards( {dog, filterByTemp, orderByAlp, orderByWei, currentDogs, orderByOri}) {
   const dogos = useSelector(state => state.dogos)
   const temperaments = useSelector(state => state.temperaments).sort((a, b) => {
     return a.name.localeCompare(b.name)
@@ -33,17 +33,17 @@ function Cards({dog, filterByTemp, orderByAlp, orderByWei}) {
   return (
   <div>
 
-    <div>
+    <div className={style.containerFilters}>
 
-      <div>
-        <p>search bar</p>
+      <div className={style.containerOneFilter}>
+        <p>Buscar raza por nombre</p>
         <input type="text" onChange={(e)=>dog(e.target.value)} />
-        <button onClick={()=>dog()}>Buscar</button>
       </div>
       
-      <div>
-        <p>Orden por temperamentoa</p>
+      <div className={style.containerOneFilter}>
+        <p>Orden por temperamento</p>
         <select name="" id="" onChange={(e)=>filterByTemp(e.target.value)}>
+        <option disabled selected value hidden>Seleccionar temperamento</option>
           {
           temperaments? temperaments.map(temp => {
             const {name, id} = temp
@@ -54,16 +54,39 @@ function Cards({dog, filterByTemp, orderByAlp, orderByWei}) {
         </select>
       </div>
       
-      <div>
-        <p>Orden alfabetico</p>
-        <button onClick={(e) => orderByAlp("ORDER_A-Z")}>A - Z</button>
-        <button onClick={(e) => orderByAlp("ORDER_Z-A")}>Z - A</button>
+      <div className={style.containerOneFilter}>
+      <p>Orden alfabetico</p>
+        <select name="alp" id="alp" onChange={(e) => orderByAlp(e.target.value)}>
+          <optgroup label='Ordenarar alfabéticamente'>
+            <option disabled selected value hidden>Ordenarar alfabéticamente</option>
+            <option value="ORDER_A-Z" >A - Z</option>
+            <option value="ORDER_Z-A" >Z - A</option>
+          </optgroup>
+        </select>
       </div>
 
-      <div>
-        <p>peso</p>
-        <button onClick={(e) => orderByWei("ORDER_MAY-MEN")}>Mayor a menor</button>
-        <button onClick={(e) => orderByWei("ORDER_MEN-MAY")}>Menor a mayor</button>
+      <div className={style.containerOneFilter}>
+        <p>Orden por peso</p>
+        <select name="" id="" onChange={(e) => orderByWei(e.target.value, dogos)}>
+          <optgroup label='Ordenarar por peso'>
+            <option disabled selected value hidden>Ordenarar por peso</option>
+            <option value="ORDER_MAY-MEN">Mayor a menor</option>
+            <option value="ORDER_MEN-MAY">Menor a mayor</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div className={style.containerOneFilter}>
+        <p>Orden por origen</p>
+        <select name="" id="" onChange={(e) => orderByOri(e.target.value)}>
+        <option disabled selected value hidden>Ordenarar por origen</option>
+          <option value="FROM_DB">Creados</option>
+          <option value="FROM_API">De la API</option>
+        </select>
+      </div>
+
+      <div className={style.containerOneFilter}>
+        <button onClick={()=>dog()} className={style.btn}>Reset filters</button>
       </div>
 
     </div>
@@ -73,7 +96,7 @@ function Cards({dog, filterByTemp, orderByAlp, orderByWei}) {
     <div className={style.container}>
     {
       
-      dogos.map(perro => (
+      currentDogs.map(perro => (
         existe(perro)
       ))
 
@@ -98,7 +121,8 @@ function mapDispatchToProps(dispatch) {
     temperament: dispatch(getTemperaments()),
     filterByTemp: temp => dispatch(filterByTemperaments(temp)),
     orderByAlp: tipo => dispatch(orderByAlphabet(tipo)),
-    orderByWei: tipo => dispatch(orderByWeight(tipo))
+    orderByWei: tipo => dispatch(orderByWeight(tipo)),
+    orderByOri: ori => dispatch(orderByOrigen(ori))
   };
 }
 

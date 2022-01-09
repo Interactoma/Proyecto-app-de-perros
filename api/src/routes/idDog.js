@@ -1,6 +1,6 @@
 const { Op } = require("sequelize");
 const { Dog, Temperament } = require('../db');
-const {getAllDogs} = require('../api/getDogs')
+const {getAllDogs} = require('../controller/getDogs')
 const axios = require('axios');
 
 async function getDogId(req, res) {
