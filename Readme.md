@@ -1,6 +1,8 @@
 # The Dogs Page Proyect
 
-![Dog xD](/client/public/favicon.ico "Dog xD")
+<p align='left'>
+    <img src='./client/public/favicon.ico' </img>
+</p>
 
  <p>En este proyecto se desarrollo una <strong>Single Page Application</strong> utilizando las siguientes tecnologias</p>
 
